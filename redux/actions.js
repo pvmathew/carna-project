@@ -1,3 +1,5 @@
+import auth from '../api/auth';
+
 // action types
 export const REGISTER_SENT = 'REGISTER_SENT';
 export const REGISTER_FULFILLED = 'REGISTER_FULFILLED';
@@ -22,17 +24,18 @@ export const FETCHING_TRENDING = 'FETCHING_TRENDING';
 export const TRENDING_FETCH_COMPLETE = 'TRENDING_FETCH_COMPLETE';
 
 // async action creators
-// export const loginUser = (email, password) => async (dispatch) => {
-//   dispatch({ type: LOG_IN_SENT });
-//   auth
-//     .login(email, password)
-//     .then((res) => {
-//       dispatch({ type: LOG_IN_FULFILLED });
-//     })
-//     .catch((err) => {
-//       dispatch({ type: LOG_IN_REJECTED, payload: err.message });
-//     });
-// };
+export const loginUser = (username, password) => async (dispatch) => {
+  dispatch({ type: LOG_IN_SENT });
+  let data = await auth.login(username, password);
+  dispatch({
+    type: LOG_IN_FULFILLED,
+    payload: {
+      token: data.token,
+      username: data.username,
+      type: data.type,
+    },
+  });
+};
 
 // export const autoLogin = () => ({
 //   type: AUTO_LOG_IN_COMPLETE,
@@ -44,4 +47,3 @@ export const TRENDING_FETCH_COMPLETE = 'TRENDING_FETCH_COMPLETE';
 //     dispatch({ type: LOG_OUT_COMPLETE });
 //   });
 // };
-

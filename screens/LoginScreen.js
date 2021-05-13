@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-
 import {
   TextInput,
   View,
   StyleSheet,
   TouchableOpacity,
   Text,
-  ActivityIndicator,
-  Image,
   StatusBar,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/actions';
 
 function LoginScreen(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -40,7 +41,7 @@ function LoginScreen(props) {
       ></TextInput>
       <TouchableOpacity
         onPress={() => {
-          props.loginUser(username, password);
+          dispatch(loginUser(username, password));
         }}
         style={styles.loginButton}
       >
@@ -113,9 +114,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
-
-// const mapStateToProps = (state) => ({
-//   err: state.auth.error,
-// });
-
-// export default connect(mapStateToProps, { loginUser })(LoginScreen);
