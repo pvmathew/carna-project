@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { TextInput, View, StyleSheet, Text, StatusBar } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../redux/actions';
 
