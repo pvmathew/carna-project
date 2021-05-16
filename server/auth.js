@@ -23,14 +23,20 @@ router.post('/login', async (req, res) => {
   if (result.rowCount) {
     let account = result.rows[0];
     let passwordMatch = await bcrypt.compare(password, account.password);
-    if (!passwordMatch) res.send({ err: 'Password is incorrect' });
+    if (!passwordMatch) return res.send({ err: 'Password is incorrect' });
     let token = jwt.sign({ username }, 'SUPER_SECRET_KEY');
-    res.send({ token, username: account.username, type: account.user_type });
+    return res.send({
+      token,
+      username: account.username,
+      type: account.user_type,
+    });
   }
 });
 
 router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  console.log('In /register endpoint');
+
+  const { username, userType, password } = req.body;
 
   // if field is missing
   if (!username || !password) {
@@ -41,14 +47,15 @@ router.post('/register', async (req, res) => {
   try {
     bcrypt.hash(password, 10, async (err, password) => {
       const newAccount = await pool.query(
-        'INSERT INTO accounts (username, password, user_type) VALUES ($1,$2,$3) ON CONFLICT (username) DO NOTHING;',
-        [username, password, 'admin']
+        'INSERT INTO accounts (username, user_type, password) VALUES ($1,$2,$3) ON CONFLICT (username) DO NOTHING;',
+        [username, userType, password]
       );
+
       if (newAccount.rowCount) {
-        return res.send({ msg: 'Account successfully created.' });
+        res.send({ msg: 'Account successfully created.' });
       } else {
         return res.send({
-          err: 'An account with that email already exists.',
+          err: 'An account with that username already exists.',
         });
       }
     });
