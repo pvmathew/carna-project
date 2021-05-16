@@ -31,8 +31,21 @@ const authReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+const addReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case REGISTER_FULFILLED:
+    case REGISTER_REJECTED:
+      return merge(INITIAL_STATE, action.payload);
+    case LOG_OUT:
+      return INITIAL_STATE;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   auth: authReducer,
+  add: addReducer,
 });
 
 export default rootReducer;

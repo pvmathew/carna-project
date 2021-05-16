@@ -2,13 +2,14 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Text, StatusBar } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/actions';
 
 function LoginScreen(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const err = useSelector((state) => state.auth.err);
   const dispatch = useDispatch();
 
   return (
@@ -41,7 +42,8 @@ function LoginScreen(props) {
       >
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
-      <Text style={styles.error}>{props.err}</Text>
+
+      <Text style={styles.error}>{err}</Text>
     </View>
   );
 }
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
   error: {
     textAlign: 'center',
     color: 'red',
-    marginTop: 5,
+    marginTop: 15,
     marginHorizontal: 10,
   },
 });

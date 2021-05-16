@@ -5,6 +5,8 @@ import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import AdminPanelScreen from './screens/AdminPanelScreen';
+import AddScreen from './screens/AddScreen'
+import NewUserScreen from './screens/NewUserScreen'
 // import TrendingScreen from './screens/TrendingScreen';
 // import SearchScreen from './screens/SearchScreen';
 // import RecipeScreen from './screens/RecipeScreen';
@@ -13,7 +15,7 @@ import AdminPanelScreen from './screens/AdminPanelScreen';
 const Stack = createStackNavigator();
 
 const AdminPanelStack = ({ navigation }) => (
-  <Stack.Navigator initialRouteName='Trending'>
+  <Stack.Navigator initialRouteName='AdminPanel'>
     <Stack.Screen
       name='AdminPanel'
       component={AdminPanelScreen}
@@ -27,7 +29,7 @@ const AdminPanelStack = ({ navigation }) => (
           fontWeight: 'bold',
         },
         headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Add')}>
             <Ionicons
               name='ios-add'
               size={25}
@@ -48,11 +50,11 @@ const AdminPanelStack = ({ navigation }) => (
         ),
       }}
     />
-    {/* <Stack.Screen
-      name='TrendingDetails'
-      component={TrendingDetailScreen}
+    <Stack.Screen
+      name='Add'
+      component={AddScreen}
       options={{
-        title: 'All Trending',
+        title: 'Add New Entry',
         headerStyle: {
           backgroundColor: '#008080',
         },
@@ -63,10 +65,21 @@ const AdminPanelStack = ({ navigation }) => (
       }}
     />
     <Stack.Screen
-      name='Search'
-      component={SearchScreen}
-      options={{ headerShown: false }}
+      name='NewUser'
+      component={NewUserScreen}
+      options={{
+        title: 'Add New User',
+        headerStyle: {
+          backgroundColor: '#008080',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
     />
+    {/*
+
     <Stack.Screen
       name='Recipe'
       component={RecipeScreen}

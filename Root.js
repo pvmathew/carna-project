@@ -4,8 +4,13 @@ import LoginScreen from './screens/LoginScreen';
 import MainDrawer from './MainDrawer';
 
 function Root(props) {
-  const loginToken = useSelector((state) => state.auth.token);
-  return loginToken ? <MainDrawer /> : <LoginScreen />;
+  const { token, type } = useSelector((state) => state.auth);
+
+  // Only admin panel implemented for now
+  if (token && type === 'admin') {
+    return <MainDrawer />;
+  }
+  return <LoginScreen />;
 }
 
 export default Root;
