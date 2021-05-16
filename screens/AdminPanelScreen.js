@@ -15,6 +15,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 // import TrendingItem from "../components/TrendingItem";
 
 import Constants from 'expo-constants';
+import { useDispatch } from 'react-redux';
 
 const AdminPanelScreen = (props) => {
   // const [currentUser, setCurrentUser] = useState({});

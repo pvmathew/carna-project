@@ -9,6 +9,7 @@ import MainTabs from './MainTabs';
 const Drawer = createDrawerNavigator();
 
 export default function MainDrawer() {
+
   return (
     <NavigationContainer>
       <Drawer.Navigator

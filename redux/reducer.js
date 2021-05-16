@@ -5,7 +5,7 @@ import {
   REGISTER_FULFILLED,
   LOG_IN_FULFILLED,
   LOG_IN_REJECTED,
-  LOG_OUT_COMPLETE,
+  LOG_OUT,
   AUTO_LOG_IN_COMPLETE,
   SEARCH_SENT,
   SEARCH_COMPLETE,
@@ -16,12 +16,16 @@ import {
 
 const merge = (prev, next) => Object.assign({}, prev, next);
 
-const authReducer = (state = {}, action) => {
+const INITIAL_STATE = {};
+
+const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOG_IN_FULFILLED:
       return merge(state, action.payload);
     case LOG_IN_REJECTED:
       return merge(state, action.payload);
+    case LOG_OUT:
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -7,8 +7,7 @@ export const REGISTER_REJECTED = 'REGISTER_REJECTED';
 export const LOG_IN_SENT = 'LOG_IN_SENT';
 export const LOG_IN_FULFILLED = 'LOG_IN_FULFILLED';
 export const LOG_IN_REJECTED = 'LOG_IN_REJECTED';
-export const LOG_OUT_SENT = 'LOG_OUT_SENT';
-export const LOG_OUT_COMPLETE = 'LOG_OUT_COMPLETE';
+export const LOG_OUT = 'LOG_OUT';
 export const AUTO_LOG_IN_COMPLETE = 'AUTO_LOG_IN_COMPLETE';
 
 export const SEARCH_SENT = 'SEARCH_SENT';
@@ -41,9 +40,4 @@ export const loginUser = (username, password) => async (dispatch) => {
 //   type: AUTO_LOG_IN_COMPLETE,
 // });
 
-// export const logoutUser = () => async (dispatch) => {
-//   dispatch({ type: LOG_OUT_SENT });
-//   auth.logout().then((res) => {
-//     dispatch({ type: LOG_OUT_COMPLETE });
-//   });
-// };
+export const logoutUser = () => ({ type: LOG_OUT });

@@ -4,10 +4,13 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { Text, Alert } from 'react-native';
+import { Text } from 'react-native';
 import { logoutUser } from '../redux/actions';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 function CustomDrawerContent(props) {
+  const dispatch = useDispatch();
+
   return (
     <DrawerContentScrollView {...props}>
       <Text style={{ textAlign: 'right', marginRight: 10 }}>Hi there,</Text>
@@ -23,24 +26,9 @@ function CustomDrawerContent(props) {
         Admin
       </Text>
       <DrawerItemList {...props} />
-      <DrawerItem
-        label='Logout'
-        onPress={() =>
-          Alert.alert('Are you sure?', '', [
-            {
-              text: 'Logout',
-              onPress: () => {
-                props.logoutUser();
-              },
-            },
-            { text: 'Cancel', style: 'cancel' },
-          ])
-        }
-      />
+      <DrawerItem label='Logout' onPress={() => dispatch(logoutUser())} />
     </DrawerContentScrollView>
   );
 }
 
-const mapStateToProps = (state) => ({});
-
-export default connect(mapStateToProps, { logoutUser })(CustomDrawerContent);
+export default CustomDrawerContent;
