@@ -6,12 +6,7 @@ import {
   LOG_IN_FULFILLED,
   LOG_IN_REJECTED,
   LOG_OUT,
-  AUTO_LOG_IN_COMPLETE,
-  SEARCH_SENT,
-  SEARCH_COMPLETE,
-  REMOVE_COMPLETE,
-  USER_FETCH_COMPLETE,
-  TRENDING_FETCH_COMPLETE,
+  FETCH_USERS_COMPLETE,
 } from './actions';
 
 const merge = (prev, next) => Object.assign({}, prev, next);
@@ -31,6 +26,17 @@ const authReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+const usersReducer = (state = [], action) => {
+  switch (action.type) {
+    case FETCH_USERS_COMPLETE:
+      return action.payload;
+    case LOG_OUT:
+      return [];
+    default:
+      return state;
+  }
+};
+
 const addReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case REGISTER_FULFILLED:
@@ -45,6 +51,7 @@ const addReducer = (state = INITIAL_STATE, action) => {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  users: usersReducer,
   add: addReducer,
 });
 

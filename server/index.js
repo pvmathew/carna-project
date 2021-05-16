@@ -14,6 +14,7 @@ app.use(function (req, res, next) {
 app.use(express.json());
 
 app.use('/auth', require('./auth'));
+app.use('/users', require('./users'));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

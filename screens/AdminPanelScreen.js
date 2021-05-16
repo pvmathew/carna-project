@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Button,
-  StatusBar,
-  Vibration,
-} from 'react-native';
+import { StyleSheet, Text, StatusBar } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 // import { connect } from "react-redux";
@@ -15,41 +8,21 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 // import TrendingItem from "../components/TrendingItem";
 
 import Constants from 'expo-constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllUsers } from '../redux/actions';
+import UserList from '../components/UserList';
 
 const AdminPanelScreen = (props) => {
-  // const [currentUser, setCurrentUser] = useState({});
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const { currentUser } = Firebase.auth();
-  //   setCurrentUser(currentUser);
-  //   props.fetchFavorites(currentUser.uid);
-  //   props.fetchTrending();
-  // }, []);
-
-  // const TrendingItems = Object.keys(props.trendingList).map((key, index) => (
-  //   <TrendingItem
-  //     key={index}
-  //     name={key}
-  //     meta={props.trendingList[key]}
-  //     navigate={props.navigation.navigate}
-  //   />
-  // ));
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
       <StatusBar barStyle='light-content' />
-      {/* 
-      {TrendingItems}
-
-      <TouchableOpacity
-        style={styles.viewDetail}
-        onPress={async () => {
-          props.navigation.navigate("TrendingDetails");
-        }}
-      >
-        <Text style={styles.viewDetailText}>View More</Text>
-      </TouchableOpacity> */}
+      <UserList showFew={true} />
     </ScrollView>
   );
 };

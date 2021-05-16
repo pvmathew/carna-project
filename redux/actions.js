@@ -1,5 +1,5 @@
 import auth from '../api/auth';
-import add from '../api/add';
+import users from '../api/users';
 
 // action types
 export const REGISTER_SENT = 'REGISTER_SENT';
@@ -9,19 +9,10 @@ export const LOG_IN_SENT = 'LOG_IN_SENT';
 export const LOG_IN_FULFILLED = 'LOG_IN_FULFILLED';
 export const LOG_IN_REJECTED = 'LOG_IN_REJECTED';
 export const LOG_OUT = 'LOG_OUT';
-export const AUTO_LOG_IN_COMPLETE = 'AUTO_LOG_IN_COMPLETE';
+// export const AUTO_LOG_IN_COMPLETE = 'AUTO_LOG_IN_COMPLETE';
 
-export const SEARCH_SENT = 'SEARCH_SENT';
-export const SEARCH_COMPLETE = 'SEARCH_COMPLETE';
-
-export const FETCHING_USER = 'FETCHING_USER';
-export const USER_FETCH_COMPLETE = 'USER_FETCH_COMPLETE';
-
-export const REMOVING_FAVORITE = 'REMOVING_FAVORITE';
-export const REMOVE_COMPLETE = 'REMOVE_COMPLETE';
-
-export const FETCHING_TRENDING = 'FETCHING_TRENDING';
-export const TRENDING_FETCH_COMPLETE = 'TRENDING_FETCH_COMPLETE';
+export const FETCH_USERS_SENT = 'FETCH_USERS_SENT';
+export const FETCH_USERS_COMPLETE = 'FETCH_USERS_COMPLETE';
 
 // async action creators
 export const loginUser = (username, password) => async (dispatch) => {
@@ -40,10 +31,19 @@ export const loginUser = (username, password) => async (dispatch) => {
     });
   }
 };
-export const addUser = (username, userType, password) => async (dispatch) => {
-  dispatch({ type: REGISTER_SENT });
-  let data = await add.user(username, userType, password);
-  dispatch({ type: REGISTER_FULFILLED, payload: data });
-};
 
 export const logoutUser = () => ({ type: LOG_OUT });
+
+// admin only action creators
+export const fetchAllUsers = () => async (dispatch) => {
+  dispatch({ type: FETCH_USERS_SENT });
+  let data = await users.fetchAll();
+  console.log(data.users);
+  dispatch({ type: FETCH_USERS_COMPLETE, payload: data.users });
+};
+
+export const addUser = (username, userType, password) => async (dispatch) => {
+  dispatch({ type: REGISTER_SENT });
+  let data = await users.register(username, userType, password);
+  dispatch({ type: REGISTER_FULFILLED, payload: data });
+};
