@@ -5,8 +5,9 @@ import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import AdminPanelScreen from './screens/AdminPanelScreen';
-import AddScreen from './screens/AddScreen'
-import NewUserScreen from './screens/NewUserScreen'
+import AddScreen from './screens/AddScreen';
+import NewUserScreen from './screens/NewUserScreen';
+import AllUsersScreen from './screens/AllUsersScreen';
 // import TrendingScreen from './screens/TrendingScreen';
 // import SearchScreen from './screens/SearchScreen';
 // import RecipeScreen from './screens/RecipeScreen';
@@ -69,6 +70,20 @@ const AdminPanelStack = ({ navigation }) => (
       component={NewUserScreen}
       options={{
         title: 'Add New User',
+        headerStyle: {
+          backgroundColor: '#008080',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    />
+    <Stack.Screen
+      name='AllUsers'
+      component={AllUsersScreen}
+      options={{
+        title: 'All Users',
         headerStyle: {
           backgroundColor: '#008080',
         },

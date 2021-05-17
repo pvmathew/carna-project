@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/all', async (req, res) => {
   let result = await pool.query(
-    'SELECT user_id, username, user_type FROM accounts'
+    'SELECT user_id, username, user_type, date_created FROM accounts WHERE accounts IS NOT NULL'
   );
   if (result.rows) {
     return res.send({

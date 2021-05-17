@@ -37,6 +37,7 @@ router.post('/register', async (req, res) => {
   console.log('In /register endpoint');
 
   const { username, userType, password } = req.body;
+  const currentDate = new Date();
 
   // if field is missing
   if (!username || !password) {
@@ -47,8 +48,8 @@ router.post('/register', async (req, res) => {
   try {
     bcrypt.hash(password, 10, async (err, password) => {
       const newAccount = await pool.query(
-        'INSERT INTO accounts (username, user_type, password) VALUES ($1,$2,$3) ON CONFLICT (username) DO NOTHING;',
-        [username, userType, password]
+        'INSERT INTO accounts (username, user_type, password, date_created) VALUES ($1,$2,$3, $4) ON CONFLICT (username) DO NOTHING;',
+        [username, userType, password, currentDate]
       );
 
       if (newAccount.rowCount) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, StatusBar } from 'react-native';
+import { StyleSheet, Text, StatusBar, SafeAreaView } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 // import { connect } from "react-redux";
@@ -22,7 +22,18 @@ const AdminPanelScreen = (props) => {
   return (
     <ScrollView style={styles.container}>
       <StatusBar barStyle='light-content' />
-      <UserList showFew={true} />
+      <SafeAreaView style={styles.userListPanel}>
+        <Text style={styles.userList}>User List</Text>
+        <UserList showFew={true} />
+        <TouchableOpacity
+          style={styles.viewAllUsers}
+          onPress={async () => {
+            props.navigation.navigate('AllUsers');
+          }}
+        >
+          <Text style={styles.viewAllUsersText}>View All Users</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </ScrollView>
   );
 };
@@ -31,34 +42,32 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f0f0f0',
     textAlign: 'center',
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: 20,
   },
   placeholder: {
     textAlign: 'center',
   },
-  viewDetail: {
+  userList: {
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  viewAllUsers: {
     width: '90%',
-    marginBottom: 20,
+    marginTop: 20,
     borderRadius: 10,
     backgroundColor: '#008080',
     shadowOffset: { width: 0, height: 0 },
     alignItems: 'center',
-    marginBottom: 60,
     marginLeft: 'auto',
     marginRight: 'auto',
+    paddingVertical: 5,
   },
-  viewDetailText: {
+  viewAllUsersText: {
     color: 'white',
-    paddingVertical: 12,
+    paddingVertical: 8,
+    fontWeight: 'bold',
   },
 });
-
-// const mapStateToProps = (state) => ({ trendingList: state.trending });
-
-// export default connect(mapStateToProps, {
-//   logoutUser,
-//   fetchFavorites,
-//   fetchTrending,
-// })(TrendingScreen);
 
 export default AdminPanelScreen;
