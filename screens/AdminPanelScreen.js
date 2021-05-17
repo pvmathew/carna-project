@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, StatusBar, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  StatusBar,
+  SafeAreaView,
+  RefreshControl,
+} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-
-// import { connect } from "react-redux";
-// import { logoutUser, fetchFavorites, fetchTrending } from "../redux/actions";
-
-// import TrendingItem from "../components/TrendingItem";
 
 import Constants from 'expo-constants';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +15,17 @@ import UserList from '../components/UserList';
 
 const AdminPanelScreen = (props) => {
   const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
+  const users = useSelector((state) => state.users);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    dispatch(fetchAllUsers());
+  }, []);
+
+  useEffect(() => {
+    setRefreshing(false);
+  }, [users]);
 
   useEffect(() => {
     dispatch(fetchAllUsers());
@@ -21,6 +33,7 @@ const AdminPanelScreen = (props) => {
 
   return (
     <ScrollView style={styles.container}>
+      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       <StatusBar barStyle='light-content' />
       <SafeAreaView style={styles.userListPanel}>
         <Text style={styles.userList}>User List</Text>
