@@ -24,7 +24,7 @@ const AddScreen = (props) => {
         }}
       >
         <Ionicons
-          name='ios-add'
+          name='person-circle-outline'
           size={25}
           color='#fff'
           style={styles.searchIcon}
@@ -38,7 +38,7 @@ const AddScreen = (props) => {
         }}
       >
         <Ionicons
-          name='ios-add'
+          name='people-circle-outline'
           size={25}
           color='#fff'
           style={styles.searchIcon}
@@ -52,7 +52,7 @@ const AddScreen = (props) => {
         }}
       >
         <Ionicons
-          name='ios-add'
+          name='book-outline'
           size={25}
           color='#fff'
           style={styles.searchIcon}

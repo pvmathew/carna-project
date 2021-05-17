@@ -7,6 +7,7 @@ import {
   LOG_IN_REJECTED,
   LOG_OUT,
   FETCH_USERS_COMPLETE,
+  CLEAR_MSG,
 } from './actions';
 
 const merge = (prev, next) => Object.assign({}, prev, next);
@@ -42,6 +43,7 @@ const addReducer = (state = INITIAL_STATE, action) => {
     case REGISTER_FULFILLED:
     case REGISTER_REJECTED:
       return merge(INITIAL_STATE, action.payload);
+    case CLEAR_MSG:
     case LOG_OUT:
       return INITIAL_STATE;
     default:

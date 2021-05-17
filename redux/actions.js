@@ -9,10 +9,11 @@ export const LOG_IN_SENT = 'LOG_IN_SENT';
 export const LOG_IN_FULFILLED = 'LOG_IN_FULFILLED';
 export const LOG_IN_REJECTED = 'LOG_IN_REJECTED';
 export const LOG_OUT = 'LOG_OUT';
-// export const AUTO_LOG_IN_COMPLETE = 'AUTO_LOG_IN_COMPLETE';
 
 export const FETCH_USERS_SENT = 'FETCH_USERS_SENT';
 export const FETCH_USERS_COMPLETE = 'FETCH_USERS_COMPLETE';
+
+export const CLEAR_MSG = 'CLEAR_MSG';
 
 // async action creators
 export const loginUser = (username, password) => async (dispatch) => {
@@ -47,3 +48,5 @@ export const addUser = (username, userType, password) => async (dispatch) => {
   let data = await users.register(username, userType, password);
   dispatch({ type: REGISTER_FULFILLED, payload: data });
 };
+
+export const clearAddMsg = () => ({ type: CLEAR_MSG });
