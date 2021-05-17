@@ -2,7 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "install": "cd server && yarn",
-    "dev": "concurrently \"expo start --web\" \"cd server && npm run start\"",
+    "dev": "concurrently \"expo start --web\" \"cd server && yarn start\"",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
