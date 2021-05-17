@@ -10,7 +10,6 @@ import {
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
 import Constants from 'expo-constants';
 
 const AddScreen = (props) => {
@@ -31,12 +30,7 @@ const AddScreen = (props) => {
         />
         <Text style={styles.viewDetailText}>New User</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.viewDetail}
-        onPress={async () => {
-          props.navigation.navigate('AdminPanel');
-        }}
-      >
+      <TouchableOpacity style={[styles.viewDetail, styles.disabled]}>
         <Ionicons
           name='people-circle-outline'
           size={25}
@@ -45,13 +39,8 @@ const AddScreen = (props) => {
         />
         <Text style={styles.viewDetailText}>New Group</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.viewDetail}
-        onPress={async () => {
-          props.navigation.navigate('AdminPanel');
-        }}
-      >
-        <Ionicons
+      <TouchableOpacity style={[styles.viewDetail, styles.disabled]}>
+      <Ionicons
           name='book-outline'
           size={25}
           color='#fff'
@@ -85,7 +74,10 @@ const styles = StyleSheet.create({
   viewDetailText: {
     color: 'white',
     paddingVertical: 8,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+  },
+  disabled: {
+    backgroundColor: 'gray',
   },
 });
 

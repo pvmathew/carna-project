@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { DataTable } from 'react-native-paper';
 
 const UserList = (props) => {
-  const users = useSelector((state) => state.users);
+  let users = useSelector((state) => state.users);
+  if (props.showFew) users =  users.slice(0, 5);
   const [sortDescending, setSortDescending] = React.useState(true);
 
   const sortedUsers = users.sort((a, b) =>

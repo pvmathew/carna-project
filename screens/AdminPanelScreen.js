@@ -47,6 +47,12 @@ const AdminPanelScreen = (props) => {
           <Text style={styles.viewAllUsersText}>View All Users</Text>
         </TouchableOpacity>
       </SafeAreaView>
+      <SafeAreaView style={styles.coursesListPanel}>
+        <Text style={styles.coursesList}>Courses List</Text>
+        <TouchableOpacity style={[styles.viewAllUsers, styles.disabled]}>
+          <Text style={styles.viewAllUsersText}>View All Courses</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </ScrollView>
   );
 };
@@ -65,6 +71,15 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
   },
+  coursesListPanel: {
+    marginTop: 10,
+  },
+  coursesList: {
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 20,
+  },
   viewAllUsers: {
     width: '90%',
     marginTop: 20,
@@ -80,6 +95,9 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingVertical: 8,
     fontWeight: 'bold',
+  },
+  disabled: {
+    backgroundColor: 'gray',
   },
 });
 
