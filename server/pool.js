@@ -1,28 +1,30 @@
-const { Pool } = require("pg");
+// const { Pool } = require("pg");
 
-const pool = new Pool({
-  user: "pavinmathew",
-  database: "carna",
-});
+// const pool = new Pool({
+//   user: "pavinmathew",
+//   database: "carna",
+// });
 
-module.exports = pool;
+// module.exports = pool;
 
-// const { Client } = require("pg");
+const { Client } = require('pg');
 
-// let pgConfig = process.env.DATABASE_URL
-//   ? {
-//       connectionString: process.env.DATABASE_URL,
-//       ssl: {
-//         rejectUnauthorized: false,
-//       },
-//     }
-//   : {
-//       user: "pavinmathew",
-//       database: "carna",
-//     };
+let pgConfig =
+  'postgres://vcqeyohi:lcPXP7-3gMYUop-KeuDMt18L97wDSqmW@arjuna.db.elephantsql.com:5432/vcqeyohi'
+    ? {
+        connectionString:
+          'postgres://vcqeyohi:lcPXP7-3gMYUop-KeuDMt18L97wDSqmW@arjuna.db.elephantsql.com:5432/vcqeyohi',
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
+    : {
+        user: 'pvmathew',
+        database: 'vcqeyohi',
+      };
 
-// const client = new Client(pgConfig);
+const client = new Client(pgConfig);
 
-// client.connect();
+client.connect();
 
-// module.exports = client;
+module.exports = client;
