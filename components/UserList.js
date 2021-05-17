@@ -5,6 +5,11 @@ import { DataTable } from 'react-native-paper';
 
 const UserList = (props) => {
   const users = useSelector((state) => state.users);
+  const [sortDescending, setSortDescending] = React.useState(true);
+
+  const sortedUsers = users.sort((a, b) =>
+    (sortDescending ? a.user_id < b.user_id : b.user_id < a.user_id) ? 1 : -1
+  );
 
   const renderRow = (user) => {
     let dateCreated = new Date(user.date_created);
@@ -20,8 +25,6 @@ const UserList = (props) => {
     );
   };
 
-  const userRows = users.map((user) => renderRow(user));
-
   return (
     <>
       <DataTable>
@@ -29,9 +32,15 @@ const UserList = (props) => {
           <DataTable.Title>Username</DataTable.Title>
           <DataTable.Title>Type</DataTable.Title>
           <DataTable.Title>Date Created</DataTable.Title>
-          <DataTable.Title numeric>ID</DataTable.Title>
+          <DataTable.Title
+            numeric
+            sortDirection={sortDescending ? 'descending' : 'ascending'}
+            onPress={() => setSortDescending(!sortDescending)}
+          >
+            ID
+          </DataTable.Title>
         </DataTable.Header>
-        {userRows}
+        {sortedUsers.map((user) => renderRow(user))}
       </DataTable>
     </>
   );
